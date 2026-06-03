@@ -1,10 +1,4 @@
 # Sla project
-if(!isset($_SESSION['admin']))
-{
-?>
-<!DOCTYPE html>
-<html>
-<head>
 <title>SLA Login</title>
 
 <link href=
