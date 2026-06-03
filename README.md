@@ -274,6 +274,7 @@ as $row)
 </body>
 </html>
 # create_user.php
+
 ## Purpose
 This file is responsible for creating Users and Admins in the SLA Configuration System.
 ### Features
