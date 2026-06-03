@@ -1,32 +1,23 @@
 # Sla project
 <title>SLA Login</title>
-
 <link href=
 "https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
 rel="stylesheet">
-
 </head>
 <body>
-
 <div class="container mt-5">
-
 <div class="card">
-
 <div class="card-header">
 Super Admin Login
 </div>
-
 <div class="card-body">
-
 <form method="post">
-
 <div class="mb-3">
 <label>User Name</label>
 <input
 class="form-control"
 name="username">
 </div>
-
 <div class="mb-3">
 <label>Password</label>
 <input
@@ -34,345 +25,224 @@ type="password"
 class="form-control"
 name="password">
 </div>
-
 <button
 name="login"
 class="btn btn-primary">
 Login
 </button>
-
 </form>
-
 </div>
 </div>
-
 </div>
 </body>
 </html>
-
 <?php
 exit;
 }
 ?>
-
 <!DOCTYPE html>
 <html>
-
 <head>
-
 <title>SLA Configuration</title>
-
 <link href=
 "https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
 rel="stylesheet">
-
 </head>
-
 <body>
-
 <div class="container mt-4">
-
 <div class="d-flex justify-content-between">
-
 <h2>SLA Configuration</h2>
-
 <a href="?logout=1"
 class="btn btn-danger">
 Logout
 </a>
-
 </div>
-
 <hr>
-
 <!-- MENU 1 -->
-
 <div class="card mb-4">
-
 <div class="card-header">
 Menu 1 - User/Admin Creation
 </div>
-
 <div class="card-body">
-
 <form method="post">
-
 <div class="row">
-
 <div class="col-md-3">
 <input
 name="username"
 class="form-control"
 placeholder="Username">
 </div>
-
 <div class="col-md-3">
 <input
 name="email"
 class="form-control"
 placeholder="Email">
 </div>
-
 <div class="col-md-2">
 <select
 name="role"
 class="form-select">
-
 <option value="USER">
 USER
 </option>
-
 <option value="ADMIN">
 ADMIN
 </option>
-
 </select>
 </div>
-
 <div class="col-md-2">
-
 <select
 name="level_id"
 class="form-select">
-
 <option value="">
 Select Level
 </option>
-
 <?php
 foreach(
 $pdo->query("SELECT * FROM levels")
 as $level)
 {
 ?>
-
 <option value="<?= $level['id'] ?>">
 <?= $level['level_name'] ?>
 </option>
-
 <?php
 }
 ?>
-
 </select>
-
 </div>
-
 <div class="col-md-2">
-
 <button
 name="saveUser"
 class="btn btn-success">
-
 Save
-
 </button>
-
 </div>
-
 </div>
-
 </form>
-
 </div>
 </div>
-
 <!-- MENU 2 -->
-
 <div class="card mb-4">
-
 <div class="card-header">
 Menu 2 - Level Flexibility
 </div>
-
 <div class="card-body">
-
 <form method="post">
-
 <div class="row">
-
 <div class="col-md-6">
-
 <input
 name="level_name"
 class="form-control"
 placeholder="Level Name">
-
 </div>
-
 <div class="col-md-3">
-
 <button
 name="addLevel"
 class="btn btn-primary">
-
 Add Level
-
 </button>
-
 </div>
-
 </div>
-
 </form>
-
 <hr>
-
 <table class="table">
-
 <tr>
 <th>ID</th>
 <th>Level</th>
 <th>Action</th>
 </tr>
-
 <?php
 foreach(
 $pdo->query("SELECT * FROM levels")
 as $row)
 {
 ?>
-
 <tr>
-
 <td><?= $row['id'] ?></td>
-
 <td><?= $row['level_name'] ?></td>
-
 <td>
-
 <a
 class="btn btn-danger btn-sm"
 href="?deleteLevel=<?= $row['id'] ?>">
-
 Delete
-
 </a>
-
 </td>
-
 </tr>
-
 <?php
 }
 ?>
-
 </table>
-
 </div>
-
 </div>
-
 <!-- MENU 3 -->
-
 <div class="card">
-
 <div class="card-header">
 Menu 3 - Reasons & Times
 </div>
-
 <div class="card-body">
-
 <form method="post">
-
 <div class="row">
-
 <div class="col-md-6">
-
 <input
 name="reason_name"
 class="form-control"
 placeholder="Reason">
-
 </div>
-
 <div class="col-md-3">
-
 <button
 name="addReason"
 class="btn btn-primary">
-
 Add Reason
-
 </button>
-
 </div>
-
 </div>
-
 </form>
-
 <hr>
-
 <form method="post">
-
 <div class="row">
-
 <div class="col-md-5">
-
 <select
 name="reason_id"
 class="form-select">
-
 <?php
 foreach(
 $pdo->query("SELECT * FROM reasons")
 as $reason)
 {
 ?>
-
 <option
 value="<?= $reason['id'] ?>">
-
 <?= $reason['reason_name'] ?>
-
 </option>
-
 <?php
 }
 ?>
-
 </select>
-
 </div>
-
 <div class="col-md-3">
-
 <input
 type="number"
 name="duration_hours"
 class="form-control"
 placeholder="Hours">
-
 </div>
-
 <div class="col-md-2">
-
 <button
 name="saveSLA"
 class="btn btn-success">
-
 Save SLA
-
 </button>
-
 </div>
-
 </div>
-
 </form>
-
 <hr>
-
 <table class="table">
-
 <tr>
 <th>Reason</th>
 <th>Hours</th>
 </tr>
-
 <?php
-
 $sql="
 SELECT
 r.reason_name,
@@ -381,47 +251,32 @@ FROM sla_times s
 JOIN reasons r
 ON r.id=s.reason_id
 ";
-
 foreach(
 $pdo->query($sql)
 as $row)
 {
 ?>
-
 <tr>
-
 <td>
 <?= $row['reason_name'] ?>
 </td>
-
 <td>
 <?= $row['duration_hours'] ?>
 </td>
-
 </tr>
-
 <?php
 }
 ?>
-
 </table>
-
 </div>
-
 </div>
-
 </div>
-
 </body>
 </html>
 # create_user.php
-
 ## Purpose
-
 This file is responsible for creating Users and Admins in the SLA Configuration System.
-
 ### Features
-
 * Creates normal users.
 * Creates admin users.
 * Assigns an admin level during admin creation.
@@ -429,44 +284,36 @@ This file is responsible for creating Users and Admins in the SLA Configuration 
 * Stores user information in the database.
 
 ### PHP Code
-
 ```php
 <?php
-
 // Database Connection
 include 'config.php';
-
 // Get form data
 $name = $_POST['name'];
 $email = $_POST['email'];
 $contact = $_POST['contact'];
-
 // Encrypt password before storing
 $password = password_hash(
     $_POST['password'],
     PASSWORD_DEFAULT
 );
-
 // User Role
 // Possible values:
 // USER
 // ADMIN
 $role = $_POST['role'];
-
 // Admin Level
 // Required only for ADMIN role
 $level_id = !empty($_POST['level_id'])
     ? $_POST['level_id']
     : NULL;
-
 // User Status
 // Active / Inactive
 $status = $_POST['status'];
 
 // Insert user/admin record
 $sql = "INSERT INTO users
-(
-    name,
+(    name,
     email,
     contact_number,
     password,
