@@ -1,48 +1,5 @@
-# Sla-project
-<?php
-session_start();
-
-/*****************************************
- DATABASE CONNECTION
-******************************************/
-$pdo = new PDO(
-    "mysql:host=localhost;dbname=sla_demo",
-    "root",
-    ""
-);
-
-$pdo->setAttribute(
-    PDO::ATTR_ERRMODE,
-    PDO::ERRMODE_EXCEPTION
-);
-
-/*****************************************
- LOGIN
-******************************************/
-if(isset($_POST['login']))
-{
-    if(
-        $_POST['username']=='admin'
-        &&
-        $_POST['password']=='admin123'
-    )
-    {
-        $_SESSION['admin']=true;
-    }
-}
-
-/*****************************************
- LOGOUT
-******************************************/
-if(isset($_GET['logout']))
-{
-    session_destroy();
-    header("Location:index.php");
-    exit;
-}
-
-/*****************************************
- USER / ADMIN CREATE
+# Sla project
+            role, USER / ADMIN CREATE
 ******************************************/
 if(isset($_POST['saveUser']))
 {
@@ -50,8 +7,6 @@ if(isset($_POST['saveUser']))
         "INSERT INTO users
         (
             username,
-            email,
-            role,
             level_id
         )
         VALUES
